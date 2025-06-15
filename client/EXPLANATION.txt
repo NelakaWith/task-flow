@@ -1,0 +1,56 @@
+# Project Structure and ShadCN UI Explanation
+
+## What Each File and Element Does
+
+### Vite & Config
+- `vite.config.ts`: Vite configuration. Sets up React, path alias (@), and build options.
+- `tsconfig.json`/`tsconfig.app.json`: TypeScript config. Sets up path aliases and strictness.
+- `.env`: Environment variables (e.g., `VITE_API_BASE_URL`).
+
+### Main Entry
+- `src/main.tsx`: Entry point. Renders `<App />` into the DOM.
+- `src/App.tsx`: Root React component. Sets up React Router using the router from `/routes/router.tsx`.
+
+### Routing
+- `src/routes/router.tsx`: Defines app routes using React Router v6. Maps `/login` and `/register` to their respective pages.
+
+### Pages
+- `src/pages/Login.tsx`: Login page. Side-by-side layout. Uses ShadCN Card, Input, Button, and custom form components. Handles login API call and toast notifications.
+- `src/pages/Register.tsx`: Register page. Similar to Login, but for registration.
+
+### Components
+- `/components/ui/`: ShadCN UI re-exports and custom wrappers (Button, Input, Card, Label, Form, FormMessage, use-toast, etc.).
+- `/components/auth/`: Custom form components for authentication:
+  - `AuthFormWrapper.tsx`: Wraps react-hook-form and zod validation. Provides form context.
+  - `InputField.tsx`: Reusable input with label and error message.
+  - `PasswordField.tsx`: Password input with show/hide toggle.
+  - `SubmitButton.tsx`: Submit button with loading state.
+
+### Lib
+- `/lib/api.ts`: Axios instance with base URL from `.env`.
+- `/lib/auth.ts`: Functions for login and register API calls.
+- `/lib/utils.ts`: Utility for merging class names (cn function).
+
+### ShadCN UI
+- `/components/ui/sonner.tsx`: Toast notification system using `sonner`.
+- `/components/ui/use-toast.ts`: Exposes a `useToast` hook for toast notifications.
+
+## How ShadCN UI Works
+- **ShadCN UI** is a set of headless, accessible React components styled with Tailwind CSS.
+- Components are added to your project via the CLI (`npx shadcn@latest add ...`). This copies the source code into your `/components/ui/` folder, so you can fully customize them.
+- You use ShadCN UI components like `<Button>`, `<Input>`, `<Card>`, etc., in your app. They are just React components with Tailwind classes.
+- For forms, you combine ShadCN UI components with `react-hook-form` and `zod` for validation.
+- Toast notifications use the `sonner` package, with a ShadCN wrapper for consistent styling and API.
+
+## Example Usage
+- To show a toast: `toast.success("Logged in!")` or `toast.error("Error message")`.
+- To use a ShadCN input: `<Input type="email" />`.
+- To add a new UI component: `npx shadcn@latest add [component]` (e.g., `button`, `input`).
+
+## Summary
+- **All UI is local and customizable.**
+- **ShadCN UI** gives you modern, accessible, and themeable components, but you own the code.
+- **Forms** are built with `react-hook-form`, validated with `zod`, and use ShadCN UI for inputs and error display.
+- **Toasts** are handled by `sonner` and a custom `use-toast` hook.
+
+For more, see https://ui.shadcn.com/docs/installation/vite

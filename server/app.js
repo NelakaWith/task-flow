@@ -1,12 +1,12 @@
 // app.js
-const express = require("express");
-const cors = require("cors");
-const dotenv = require("dotenv");
+import express from "express";
+import cors from "cors";
+import dotenv from "dotenv";
 dotenv.config();
 
-const authRoutes = require("./routes/auth");
-const projectRoutes = require("./routes/projects");
-const taskRoutes = require("./routes/tasks");
+import authRoutes from "./routes/auth.js";
+import projectRoutes from "./routes/projects.js";
+import taskRoutes from "./routes/tasks.js";
 
 const app = express();
 
@@ -17,4 +17,4 @@ app.use("/api/auth", authRoutes);
 app.use("/api/projects", projectRoutes);
 app.use("/api/tasks", taskRoutes);
 
-module.exports = app;
+export default app;

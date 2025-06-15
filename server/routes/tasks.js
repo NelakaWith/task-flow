@@ -1,9 +1,14 @@
 // routes/tasks.js
-const express = require("express");
-const router = express.Router();
-const taskController = require("../controllers/taskController");
+import { Router } from "express";
+import {
+  createTaskHandler,
+  updateTaskHandler,
+} from "../controllers/taskController.js";
+import auth from "../middleware/auth.js";
 
-router.post("/:projectId/tasks", taskController.createTask);
-router.put("/:id", taskController.updateTask);
+const router = Router();
 
-module.exports = router;
+router.post("/:projectId/tasks", auth, createTaskHandler);
+router.put("/:id", auth, updateTaskHandler);
+
+export default router;

@@ -1,10 +1,16 @@
 // routes/projects.js
-const express = require("express");
-const router = express.Router();
-const projectController = require("../controllers/projectController");
+import { Router } from "express";
+import {
+  getProjectsHandler,
+  createProjectHandler,
+  getProjectByIdHandler,
+} from "../controllers/projectController.js";
+import auth from "../middleware/auth.js";
 
-router.get("/", projectController.getProjects);
-router.post("/", projectController.createProject);
-router.get("/:id", projectController.getProjectById);
+const router = Router();
 
-module.exports = router;
+router.get("/", auth, getProjectsHandler);
+router.post("/", auth, createProjectHandler);
+router.get("/:id", auth, getProjectByIdHandler);
+
+export default router;

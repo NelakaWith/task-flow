@@ -9,7 +9,8 @@ import {
 import { zodResolver } from "@hookform/resolvers/zod";
 
 interface AuthFormWrapperProps<T extends FieldValues> {
-  schema: any; // Accept any Zod schema for resolver compatibility
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  schema: any;
   defaultValues: DefaultValues<T>;
   onSubmit: SubmitHandler<T>;
   children: ReactNode;

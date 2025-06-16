@@ -39,7 +39,7 @@ export default function Register() {
                 try {
                   await register(data);
                   toast.success("Registration successful");
-                  navigate("/dashboard");
+                  navigate("/login");
                 } catch (err: unknown) {
                   toast.error(
                     err &&

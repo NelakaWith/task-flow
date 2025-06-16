@@ -38,7 +38,7 @@ export default function Login() {
                 try {
                   await login(data);
                   toast.success("Login successful");
-                  navigate("/dashboard");
+                  navigate("/");
                 } catch (err: unknown) {
                   toast.error(
                     err &&

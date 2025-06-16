@@ -40,8 +40,22 @@ export const login = async (req, res) => {
       process.env.JWT_SECRET,
       { expiresIn: "1d" }
     );
-    res.json({ token });
+    // Set secure, httpOnly cookie
+    res.cookie("token", token, {
+      httpOnly: true,
+      secure: process.env.NODE_ENV === "production",
+      sameSite: "strict",
+      maxAge: 24 * 60 * 60 * 1000, // 1 day
+    });
+    res.json({ success: true });
   } catch (err) {
     res.status(500).json({ message: "Server error", error: err.message });
   }
+};
+
+export const me = async (req, res) => {
+  if (!req.user) {
+    return res.status(401).json({ message: "Not authenticated" });
+  }
+  res.json({ id: req.user.id, email: req.user.email });
 };
